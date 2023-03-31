@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from './styles.module.scss';
 interface OffcanvasProps {
   isOpen: boolean;
@@ -10,6 +10,8 @@ interface OffcanvasProps {
 const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }) => {
   const [removeOverlay, setRemoveOverlay] = useState(false);
 
+  const offcanvasRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (removeOverlay) {
       setTimeout(() => {
@@ -19,6 +21,26 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
       setRemoveOverlay(isOpen);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    }
+
+    const offcanvasElement = offcanvasRef.current;
+
+    if (offcanvasElement) {
+      offcanvasElement.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      if (offcanvasElement) {
+        offcanvasElement.removeEventListener('keydown', handleKeyDown);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -36,7 +58,10 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
 
   return (
     <>
-      <div className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ')}>
+      <div
+        ref={offcanvasRef}
+        className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ')}
+      >
         <div className={styles['offcanvas-content']}>{children}</div>
       </div>
       {removeOverlay && (
