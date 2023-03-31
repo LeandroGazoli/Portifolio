@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
-import { FiInstagram } from 'react-icons/fi';
-import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
-import { FaWhatsapp, FaBars } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import Link from 'next/link';
 import { NavContext } from '@/context/NavContext';
 import Offcanvas from '../Offcanvas';
+import SocialLinks from './SocialLinks';
 
 export default function Header() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
@@ -55,28 +54,7 @@ export default function Header() {
           </Link>
           <div className={styles.menu}>
             <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
-            <ul className={styles.social_links}>
-              <li>
-                <Link href="">
-                  <FiInstagram size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <AiFillGithub size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <AiFillLinkedin size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <FaWhatsapp size={25} />
-                </Link>
-              </li>
-            </ul>
+            <SocialLinks className={styles.social_links} />
           </div>
           <button
             className={styles.button_toggle}
@@ -99,28 +77,7 @@ export default function Header() {
         <div className={`${styles.container} ${styles.offcanvas_body}`}>
           <div className={styles.mobileMenu}>
             <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
-            <ul className={styles.social_links}>
-              <li>
-                <Link href="">
-                  <FiInstagram size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <AiFillGithub size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <AiFillLinkedin size={25} />
-                </Link>
-              </li>
-              <li>
-                <Link href="">
-                  <FaWhatsapp size={25} />
-                </Link>
-              </li>
-            </ul>
+            <SocialLinks className={styles.social_links} />
           </div>
         </div>
       </Offcanvas>
