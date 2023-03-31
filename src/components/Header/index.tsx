@@ -6,8 +6,10 @@ import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 import { FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link';
 import { NavContext } from '@/context/NavContext';
+import Offcanvas from '../Offcanvas';
 
 export default function Header() {
+  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(true);
   const { activeLinkId, setActiveLinkId } = useContext(NavContext);
   const navLinks = ['Sobre mim', 'Projetos', 'Conhecimento', 'Fale Comigo'];
 
@@ -25,7 +27,6 @@ export default function Header() {
       document.getElementById(scrollToId)?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    console.log(activeLinkId);
     return (
       <li key={content}>
         <button
@@ -36,6 +37,10 @@ export default function Header() {
         </button>
       </li>
     );
+  };
+
+  const handleOpenOrCloseOffcanvas = () => {
+    setIsOffcanvasOpen(!isOffcanvasOpen);
   };
 
   return (
@@ -50,17 +55,6 @@ export default function Header() {
           </Link>
           <div className={styles.menu}>
             <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
-            {/* <ul>
-              <li>
-                <Link href="#Projetos1">Projetos</Link>
-              </li>
-              <li>
-                <Link href="#Projetos2">Projetos</Link>
-              </li>
-              <li>
-                <Link href="#Projetos3">Projetos</Link>
-              </li>
-            </ul> */}
             <ul className={styles.social_links}>
               <li>
                 <Link href="">
@@ -86,6 +80,18 @@ export default function Header() {
           </div>
         </div>
       </nav>
+
+      <div>
+        <button onClick={handleOpenOrCloseOffcanvas}>Open Offcanvas</button>
+        <Offcanvas
+          isOpen={isOffcanvasOpen}
+          onClose={handleOpenOrCloseOffcanvas}
+        >
+          <h2>Offcanvas Content</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Offcanvas>
+      </div>
+
       <div>
         <p>teste</p>
         <p>teste</p>
