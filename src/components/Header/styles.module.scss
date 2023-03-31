@@ -1,4 +1,40 @@
+$verde: hsl(90, 92%, 43%);
+
 .container {
+  width: 100%;
+  padding-right: calc(1.5rem * 0.5);
+  padding-left: calc(1.5rem * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1320px;
+  }
+}
+
+.navigation {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -7,17 +43,6 @@
   position: sticky;
   top: 0px;
   z-index: 100;
-  margin: 0 auto;
-  padding-left: calc(3rem * 0.5);
-  padding-right: calc(3rem * 0.5);
-
-  @media (min-width: 720px) {
-    max-width: 70%;
-  }
-
-  @media (min-width: 1024px) {
-    max-width: 1320px;
-  }
 }
 
 .scroll {
@@ -29,6 +54,7 @@
   li button,
   li a {
     color: #fff;
+    opacity: 1;
   }
 }
 
@@ -42,8 +68,8 @@
 
 .logo {
   font-size: 1rem;
-  opacity: 0.7;
-  color: hsl(90, 92%, 43%);
+  // opacity: 0.7;
+  color: $verde;
 }
 .menu {
   display: flex;
@@ -58,7 +84,7 @@
 
   li button,
   li a {
-    color: hsl(90, 92%, 43%);
+    color: $verde;
     opacity: 0.7;
     transition: opacity 0.4s;
     font-size: 0.6rem;
@@ -87,7 +113,7 @@
     &::after {
       position: absolute;
       width: 100%;
-      background-color: hsla(0, 0%, 100%, 0.658);
+      background-color: #fff;
       transition: width 0.2s;
     }
   }
@@ -98,7 +124,7 @@
   gap: 1rem;
 
   li {
-    color: hsla(0, 0%, 100%, 0.658);
+    color: #fff;
   }
 }
 
@@ -112,4 +138,44 @@
   .menu {
     display: none;
   }
+}
+
+.button_toggle {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  border: 0;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+
+  svg {
+    color: $verde;
+  }
+}
+
+.scroll .button_toggle {
+  svg {
+    color: #fff;
+  }
+}
+
+.offcanvas_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.offcanvas_body {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.mobileMenu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
