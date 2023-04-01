@@ -16,7 +16,7 @@
 }
 
 .titleH2 {
-  font-size: 4rem;
+  font-size: 1rem;
   font-weight: 100;
   margin-bottom: 0.5rem;
   line-height: 4rem;
@@ -27,7 +27,7 @@
 }
 
 .titleH1 {
-  font-size: 4rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   line-height: 4rem;
@@ -93,5 +93,15 @@
 
   100% {
     transform: translateY(0%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .titleH2 {
+    font-size: 4rem;
+  }
+
+  .titleH1 {
+    font-size: 4rem;
   }
 }

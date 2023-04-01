@@ -69,15 +69,13 @@ export default function Header() {
             <ul className={styles.navbar}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
           </div>
           <div className={styles.menu}>
-            <div>
-              <SocialLinks className={styles.social_links} />
-              <button
-                className={styles.button_toggle}
-                onClick={handleOpenOrCloseOffcanvas}
-              >
-                <FaBars size={25} />
-              </button>
-            </div>
+            <SocialLinks className={styles.social_links} />
+            <button
+              className={styles.button_toggle}
+              onClick={handleOpenOrCloseOffcanvas}
+            >
+              <FaBars size={25} />
+            </button>
           </div>
         </div>
       </nav>
