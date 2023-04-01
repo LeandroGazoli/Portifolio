@@ -10,8 +10,6 @@ interface OffcanvasProps {
 const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }) => {
   const [removeOverlay, setRemoveOverlay] = useState(false);
 
-  const offcanvasRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (removeOverlay) {
       setTimeout(() => {
@@ -29,16 +27,10 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
       }
     }
 
-    const offcanvasElement = offcanvasRef.current;
-
-    if (offcanvasElement) {
-      offcanvasElement.addEventListener('keydown', handleKeyDown);
-    }
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      if (offcanvasElement) {
-        offcanvasElement.removeEventListener('keydown', handleKeyDown);
-      }
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -58,10 +50,7 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
 
   return (
     <>
-      <div
-        ref={offcanvasRef}
-        className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ')}
-      >
+      <div className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ')}>
         <div className={styles['offcanvas-content']}>{children}</div>
       </div>
       {removeOverlay && (
