@@ -7,11 +7,13 @@ import Link from 'next/link';
 import { NavContext } from '@/context/NavContext';
 import Offcanvas from '../Offcanvas';
 import SocialLinks from './SocialLinks';
+import useTranslation from 'next-translate/useTranslation';
 
 export default function Header() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const { activeLinkId, setActiveLinkId } = useContext(NavContext);
-  const navLinks = ['Sobre mim', 'Projetos', 'Conhecimento', 'Fale Comigo'];
+  const { t, lang } = useTranslation('common');
+  const navLinks = [t('menu.home'), t('menu.aboutMe'), t('menu.projects'), t('menu.skills'), t('menu.contact')];
 
   const [scroll, setScroll] = useState(false);
 
@@ -24,17 +26,26 @@ export default function Header() {
   const renderNavLink = (content: string) => {
     const scrollToId = `${content.toLowerCase().replace(' ', '')}Section`;
     const handleClick = () => {
-      document.getElementById(scrollToId)?.scrollIntoView({ behavior: 'smooth' });
+      // document.getElementById(scrollToId)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.querySelector<Element>(`#${scrollToId}`);
+      if (element) {
+        const topPos = element.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+          top: topPos,
+          behavior: 'smooth',
+        });
+      }
     };
 
     return (
       <li key={content}>
-        <button
+        <Link
+          href={`${lang}#${scrollToId}`}
           onClick={handleClick}
           className={activeLinkId === content ? styles.active : ''}
         >
           {content}
-        </button>
+        </Link>
       </li>
     );
   };
@@ -53,8 +64,11 @@ export default function Header() {
           >
             Leandro Gazoli
           </Link>
+
           <div className={styles.menu}>
             <ul className={styles.navbar}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
+          </div>
+          <div className={styles.menu}>
             <div>
               <SocialLinks className={styles.social_links} />
               <button
@@ -99,7 +113,7 @@ export default function Header() {
           </div>
           <div className={`${styles.container} ${styles.offcanvas_body}`}>
             <div className={`${styles.mobileMenu} ${styles.menu}`}>
-              <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
+              <ul onClick={handleOpenOrCloseOffcanvas}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
               <SocialLinks className={styles.social_links} />
             </div>
           </div>

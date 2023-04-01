@@ -13,10 +13,14 @@
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
     "next": "13.2.4",
+    "next-translate": "^2.0.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "sass": "^1.60.0",
     "typescript": "5.0.2"
+  },
+  "devDependencies": {
+    "next-translate-plugin": "^2.0.4"
   }
 }

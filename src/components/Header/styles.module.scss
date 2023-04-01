@@ -1,38 +1,4 @@
-$verde: hsl(90, 92%, 43%);
-
-.container {
-  width: 100%;
-  padding-right: calc(1.5rem * 0.5);
-  padding-left: calc(1.5rem * 0.5);
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-@media (min-width: 1400px) {
-  .container {
-    max-width: 1320px;
-  }
-}
+@use '../../styles/default.module.scss' as v;
 
 .header {
   position: sticky;
@@ -46,7 +12,6 @@ $verde: hsl(90, 92%, 43%);
   align-items: center;
   height: 4rem;
   max-width: 100%;
-
   background-color: hsl(0, 0%, 8%);
 }
 
@@ -59,7 +24,7 @@ $verde: hsl(90, 92%, 43%);
 }
 
 .logo {
-  color: $verde;
+  color: v.$verde;
   font-size: 1rem;
   @media (min-width: 400px) {
     font-size: 1.5rem;
@@ -70,7 +35,7 @@ $verde: hsl(90, 92%, 43%);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
+    // width: 70%;
   }
 
   ul.navbar {
@@ -87,7 +52,7 @@ $verde: hsl(90, 92%, 43%);
 
   li button,
   li a {
-    color: $verde;
+    color: v.$verde;
     opacity: 0.7;
     transition: opacity 0.4s;
     font-size: 1rem;
@@ -173,7 +138,7 @@ $verde: hsl(90, 92%, 43%);
   }
 
   svg {
-    color: $verde;
+    color: v.$verde;
   }
 
   &:focus-visible {
@@ -194,6 +159,7 @@ $verde: hsl(90, 92%, 43%);
   padding: 1.5rem 1rem;
   a {
     color: #fff;
+    font-size: 1.3rem;
   }
 }
 
@@ -214,6 +180,7 @@ $verde: hsl(90, 92%, 43%);
   ul {
     li,
     button,
+    a,
     svg {
       display: inline-block;
       text-align: center;

@@ -10,7 +10,7 @@ export default function SobreMim() {
         backgroundColor: 'yellowgreen',
         padding: '5rem 2rem',
       }}
-      id="sobreminSection"
+      id="sobremimSection"
     >
       leandro leandro
     </section>
