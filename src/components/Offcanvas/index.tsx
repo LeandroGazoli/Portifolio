@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, ReactNode } from 'react';
 import styles from './styles.module.scss';
 interface OffcanvasProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
-  size?: number | string;
+  children: ReactNode;
+  classes: string | undefined;
 }
 
-const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }) => {
+const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, classes }) => {
   const [removeOverlay, setRemoveOverlay] = useState(false);
 
   useEffect(() => {
@@ -39,7 +39,9 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '17px';
+      if (screen.width >= 1024) {
+        document.body.style.paddingRight = '17px';
+      }
     } else {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
@@ -52,7 +54,7 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
 
   return (
     <>
-      <div className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ')}>
+      <div className={[styles.offcanvas, styles['offcanvas-end'], isOpen && styles.show].join(' ') + ' ' + classes}>
         <div className={styles['offcanvas-content']}>{children}</div>
       </div>
       {removeOverlay && (

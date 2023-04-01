@@ -12,20 +12,24 @@
   background-color: #fff;
 }
 
+.offcanvas-content {
+  height: 100%;
+}
+
 .offcanvas.offcanvas-end {
   transform: translateX(0);
   transition: all 0.4s ease-in-out;
   top: 0;
   right: 0;
-  width: 400px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 400px;
+  }
 
   &:not(.show) {
     transform: translateX(100%);
   }
-}
-
-.offcanvas-content {
-  height: calc(100vh - 50px);
 }
 
 .offcanvas-overlay {

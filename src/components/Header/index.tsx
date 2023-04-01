@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { FaBars } from 'react-icons/fa';
+import { HiXMark } from 'react-icons/hi2';
 import Link from 'next/link';
 import { NavContext } from '@/context/NavContext';
 import Offcanvas from '../Offcanvas';
@@ -43,44 +44,67 @@ export default function Header() {
   };
 
   return (
-    <>
+    <header className={styles.header}>
       <nav className={`${styles.container} ${scroll ? styles.scroll : ''} ${styles.navigation}`}>
         <div className={styles.wrapper}>
           <Link
-            href="#home"
+            href="/"
             className={styles.logo}
           >
             Leandro Gazoli
           </Link>
           <div className={styles.menu}>
-            <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
-            <SocialLinks className={styles.social_links} />
+            <ul className={styles.navbar}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
+            <div>
+              <SocialLinks className={styles.social_links} />
+              <button
+                className={styles.button_toggle}
+                onClick={handleOpenOrCloseOffcanvas}
+              >
+                <FaBars size={25} />
+              </button>
+            </div>
           </div>
-          <button
-            className={styles.button_toggle}
-            onClick={handleOpenOrCloseOffcanvas}
-          >
-            <FaBars size={25} />
-          </button>
         </div>
       </nav>
 
       <Offcanvas
         isOpen={isOffcanvasOpen}
         onClose={handleOpenOrCloseOffcanvas}
-        size="90%"
+        classes={styles.bgDark}
       >
         <div
-          className={styles.offcanvas_Header}
-          onClick={handleOpenOrCloseOffcanvas}
-        ></div>
-        <div className={`${styles.container} ${styles.offcanvas_body}`}>
-          <div className={styles.mobileMenu}>
-            <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
-            <SocialLinks className={styles.social_links} />
+          style={{
+            display: 'flex',
+            flexDirection: `column`,
+            height: '100%',
+          }}
+        >
+          <div
+            className={styles.offcanvas_Header}
+            onClick={handleOpenOrCloseOffcanvas}
+          >
+            <Link
+              href="#home"
+              className={styles.logo}
+            >
+              Leandro Gazoli
+            </Link>
+            <button onClick={handleOpenOrCloseOffcanvas}>
+              <HiXMark
+                size={30}
+                color="#fff"
+              />
+            </button>
+          </div>
+          <div className={`${styles.container} ${styles.offcanvas_body}`}>
+            <div className={`${styles.mobileMenu} ${styles.menu}`}>
+              <ul>{navLinks.map((nav) => renderNavLink(nav))}</ul>
+              <SocialLinks className={styles.social_links} />
+            </div>
           </div>
         </div>
       </Offcanvas>
-    </>
+    </header>
   );
 }
