@@ -27,12 +27,14 @@ const Offcanvas: React.FC<OffcanvasProps> = ({ isOpen, onClose, children, size }
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown);
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
