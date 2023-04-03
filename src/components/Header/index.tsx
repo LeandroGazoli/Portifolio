@@ -8,14 +8,17 @@ import { NavContext } from '@/context/NavContext';
 import Offcanvas from '../Offcanvas';
 import SocialLinks from './SocialLinks';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 
 export default function Header() {
-  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const { activeLinkId, setActiveLinkId } = useContext(NavContext);
+
+  const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
+  const [scroll, setScroll] = useState(false);
+  const [currentLanguageImage, setCurrentLanguageImage] = useState(require('@/assets/icons/eua.svg'));
+
   const { t, lang } = useTranslation('common');
   const navLinks = [t('menu.home'), t('menu.aboutMe'), t('menu.projects'), t('menu.skills'), t('menu.contact')];
-
-  const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -69,6 +72,14 @@ export default function Header() {
             <ul className={styles.navbar}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
           </div>
           <div className={styles.menu}>
+            <button>
+              <Image
+                src={currentLanguageImage}
+                alt="Change Language"
+                width={25}
+                quality={75}
+              />
+            </button>
             <SocialLinks className={styles.social_links} />
             <button
               className={styles.button_toggle}

@@ -16,10 +16,10 @@
 }
 
 .titleH2 {
-  font-size: 1rem;
+  font-size: 2rem;
+  text-align: center;
   font-weight: 100;
-  margin-bottom: 0.5rem;
-  line-height: 4rem;
+  line-height: initial;
 
   span {
     color: v.$verde;
@@ -27,16 +27,17 @@
 }
 
 .titleH1 {
-  font-size: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  line-height: 4rem;
+  line-height: initial;
 }
 
 .text {
   text-align: center;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.8rem;
 }
 
 .buttonGroup {
@@ -63,6 +64,7 @@
   transition: all 0.15s ease-in-out;
   cursor: pointer;
   opacity: 0.8;
+  width: 140px;
 
   &:hover {
     opacity: 1;
@@ -99,9 +101,17 @@
 @media (min-width: 1024px) {
   .titleH2 {
     font-size: 4rem;
+    line-height: 4rem;
+    margin-bottom: 0.5rem;
   }
 
   .titleH1 {
     font-size: 4rem;
+    line-height: 4rem;
+    margin-bottom: 0.5rem;
+  }
+  .text {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
