@@ -32,6 +32,19 @@ export default function Header() {
     });
   }, []);
 
+  useEffect(() => {
+    switch (lang) {
+      case 'pt':
+        setCurrentLanguageImage(require('@/assets/icons/brazil.svg'));
+        break;
+
+      default:
+        setCurrentLanguageImage(require('@/assets/icons/eua.svg'));
+        break;
+    }
+  }, []);
+
+  console.log(lang);
   const renderNavLink = (content: string) => {
     const scrollToId = `${content.toLowerCase().replace(' ', '')}Section`;
     const handleClick = () => {
