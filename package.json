@@ -7,7 +7,9 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -22,6 +24,14 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
-    "next-translate-plugin": "^2.0.4"
+    "@storybook/addon-essentials": "^7.0.1",
+    "@storybook/addon-interactions": "7.0.2",
+    "@storybook/addon-links": "7.0.2",
+    "@storybook/blocks": "7.0.2",
+    "@storybook/nextjs": "7.0.2",
+    "@storybook/react": "7.0.2",
+    "@storybook/testing-library": "0.0.14-next.2",
+    "next-translate-plugin": "^2.0.4",
+    "storybook": "7.0.2"
   }
 }

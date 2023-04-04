@@ -1,0 +1,32 @@
+.menuItem {
+  background-color: transparent;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  border-radius: 0px;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  appearance: none;
+  color: inherit;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  min-height: 48px;
+  padding: 6px 16px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+@media (min-width: 600px) {
+  .menuItem {
+    min-height: auto;
+  }
+}
