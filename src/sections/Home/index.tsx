@@ -3,7 +3,6 @@ import { useNav } from '@/hooks/useNav';
 import styles from './styles.module.scss';
 import { FaDownload } from 'react-icons/fa';
 import { BsChevronDoubleDown } from 'react-icons/bs';
-import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 
 export default function HomeSection() {
@@ -11,7 +10,7 @@ export default function HomeSection() {
   const { t } = useTranslation('home');
 
   const handleClick = () => {
-    const element = document.querySelector<Element>('#sobreminSection');
+    const element = document.querySelector<Element>('#sobremimSection');
     if (element) {
       const topPos = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
@@ -20,6 +19,7 @@ export default function HomeSection() {
       });
     }
   };
+
   return (
     <section
       id="homeSection"
@@ -33,24 +33,29 @@ export default function HomeSection() {
         <h1 className={styles.titleH1}>{t('profission')}</h1>
         <p className={styles.text}>{t('text')}</p>
         <div className={styles.buttonGroup}>
-          <button
+          <a
             className={`${styles.button} ${styles.outlined}`}
-            onClick={async () => await setLanguage('en')}
+            href="/assets/docs/04/2023/curriculo.pdf"
+            download="Curriculo.pdf"
           >
-            Download CV <FaDownload size={15} />
-          </button>
+            {t('curriculo')}{' '}
+            <FaDownload
+              size={15}
+              className={styles.downloadIcon}
+            />
+          </a>
           <button
             className={styles.button}
-            onClick={async () => await setLanguage('pt')}
+            onClick={handleClick}
           >
-            Know more
+            {t('botaoSobre')}
           </button>
         </div>
         <div
           className={styles.scroll}
           onClick={handleClick}
         >
-          <BsChevronDoubleDown size={25} />
+          <BsChevronDoubleDown size={20} />
         </div>
       </div>
     </section>
