@@ -18,7 +18,7 @@ export default function Header() {
 
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
-  const [currentLanguageImage, setCurrentLanguageImage] = useState();
+  const [currentLanguageImage, setCurrentLanguageImage] = useState(require('@/assets/icons/eua.svg'));
 
   const { t, lang } = useTranslation('common');
   const navLinks = [t('menu.home'), t('menu.aboutMe'), t('menu.projects'), t('menu.skills'), t('menu.contact')];
