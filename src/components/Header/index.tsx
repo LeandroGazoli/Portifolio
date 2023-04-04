@@ -44,7 +44,6 @@ export default function Header() {
     }
   }, []);
 
-  console.log(lang);
   const renderNavLink = (content: string) => {
     const scrollToId = `${content.toLowerCase().replace(' ', '')}Section`;
     const handleClick = () => {
