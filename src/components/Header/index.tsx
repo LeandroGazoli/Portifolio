@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { MouseEvent, useContext, useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { FaBars } from 'react-icons/fa';
@@ -9,6 +9,9 @@ import Offcanvas from '../Offcanvas';
 import SocialLinks from './SocialLinks';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
+import Menu from '../ui/Menu';
+import MenuItem from '../ui/MenuItem';
+import setLanguage from 'next-translate/setLanguage';
 
 export default function Header() {
   const { activeLinkId, setActiveLinkId } = useContext(NavContext);
@@ -20,6 +23,9 @@ export default function Header() {
   const { t, lang } = useTranslation('common');
   const navLinks = [t('menu.home'), t('menu.aboutMe'), t('menu.projects'), t('menu.skills'), t('menu.contact')];
 
+  const [openMenuLanguage, setOpenMenuLanguage] = useState(false);
+  const [currentElementMenuLanguage, setCurrentElementMenuLanguage] = useState<HTMLElement>();
+
   useEffect(() => {
     window.addEventListener('scroll', () => {
       setScroll(window.scrollY > 50);
@@ -29,7 +35,6 @@ export default function Header() {
   const renderNavLink = (content: string) => {
     const scrollToId = `${content.toLowerCase().replace(' ', '')}Section`;
     const handleClick = () => {
-      // document.getElementById(scrollToId)?.scrollIntoView({ behavior: 'smooth' });
       const element = document.querySelector<Element>(`#${scrollToId}`);
       if (element) {
         const topPos = element.getBoundingClientRect().top + window.pageYOffset;
@@ -57,6 +62,33 @@ export default function Header() {
     setIsOffcanvasOpen(!isOffcanvasOpen);
   };
 
+  const handleClickChangeLanguage = (event: MouseEvent<HTMLElement>) => {
+    setCurrentElementMenuLanguage(event.currentTarget);
+    setOpenMenuLanguage(true);
+  };
+
+  const handleCloseMenuLanguage = () => {
+    setOpenMenuLanguage(false);
+  };
+
+  const handleChangeImageAndLanguage = (locale: 'pt' | 'en') => {
+    if (locale === lang) {
+      return;
+    }
+
+    switch (locale) {
+      case 'pt':
+        setCurrentLanguageImage(require('@/assets/icons/brazil.svg'));
+        break;
+
+      default:
+        setCurrentLanguageImage(require('@/assets/icons/eua.svg'));
+        break;
+    }
+
+    setLanguage(locale);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={`${styles.container} ${scroll ? styles.scroll : ''} ${styles.navigation}`}>
@@ -72,7 +104,7 @@ export default function Header() {
             <ul className={styles.navbar}>{navLinks.map((nav) => renderNavLink(nav))}</ul>
           </div>
           <div className={styles.menu}>
-            <button>
+            <button onClick={handleClickChangeLanguage}>
               <Image
                 src={currentLanguageImage}
                 alt="Change Language"
@@ -80,6 +112,28 @@ export default function Header() {
                 quality={75}
               />
             </button>
+            <Menu
+              open={openMenuLanguage}
+              anchorEl={currentElementMenuLanguage}
+              onClose={handleCloseMenuLanguage}
+            >
+              <MenuItem onClick={() => handleChangeImageAndLanguage('pt')}>
+                <Image
+                  src={require('@/assets/icons/brazil.svg')}
+                  alt="Português Brasileiro"
+                  width={25}
+                  height={25}
+                />
+              </MenuItem>
+              <MenuItem onClick={() => handleChangeImageAndLanguage('en')}>
+                <Image
+                  src={require('@/assets/icons/eua.svg')}
+                  alt="English"
+                  width={25}
+                  height={25}
+                />
+              </MenuItem>
+            </Menu>
             <SocialLinks className={styles.social_links} />
             <button
               className={styles.button_toggle}
