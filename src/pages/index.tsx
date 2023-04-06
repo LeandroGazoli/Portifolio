@@ -1,22 +1,11 @@
 import React from 'react';
 import Header from '@/components/Header';
 import HomeSection from '@/sections/Home';
-import SobreMim from '@/sections/SobreMin';
 import Head from 'next/head';
+import SobreMim from '@/sections/SobreMim';
+import Projects from '@/sections/Projects';
 
 export default function Home() {
-  // const [isOpen, setIsOpen] = React.useState(false);
-  // const [anchorEl, setAnchorEl] = React.useState<HTMLElement>();
-
-  // const handleClose = () => {
-  //   setIsOpen(false);
-  // };
-
-  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  //   setIsOpen(true);
-  //   console.log(event);
-  // };
   return (
     <>
       <Head>
@@ -26,6 +15,7 @@ export default function Home() {
       <main>
         <HomeSection />
         <SobreMim />
+        <Projects />
       </main>
     </>
   );
